@@ -14,7 +14,7 @@
         @loadedmetadata="onVideoLoaded"
       ></video>
       <CropperContainer
-        v-if="showCrop"
+        v-show="showCrop"
         :scale-factor="scaleFactor"
         @crop-change="handleCropChange"
       />
@@ -23,10 +23,12 @@
     <!-- Custom Video Controls -->
     <div class="video-controls">
       <button @click="togglePlayPause" class="play-pause-btn">
-        {{ isPlaying ? "⏸️" : "▶️" }}
+        <PauseIcon v-if="isPlaying" />
+        <PlayIcon v-else />
       </button>
-      <div>
+      <div class="crop-toggle">
         <label>
+          <CropIcon :class="{ active: showCrop }" />
           <input type="checkbox" v-model="showCrop" />
         </label>
       </div>
@@ -62,6 +64,9 @@
 import { VideoMetadata } from "../../main/video_utils";
 import { onMounted, onBeforeUnmount, ref, computed, watch } from "vue";
 import CropperContainer from "./CropperContainer.vue";
+import PauseIcon from "./icons/PauseIcon.vue";
+import PlayIcon from "./icons/PlayIcon.vue";
+import CropIcon from "./icons/CropIcon.vue";
 
 interface Props {
   videoData: VideoMetadata;
@@ -84,7 +89,7 @@ const timeLine = ref<HTMLElement>();
 // Video playback state
 const isPlaying = ref(false);
 const currentTime = ref(0);
-const showCrop = ref(false);
+const showCrop = ref(true);
 
 // Selection in pixels within the full scrollable width of the timeline
 const selectionStartPx = ref(0);
@@ -231,12 +236,6 @@ function seekToPosition(event: MouseEvent) {
     startSeconds.value,
     Math.min(endSeconds.value, newTime)
   );
-}
-
-function formatTime(seconds: number): string {
-  const mins = Math.floor(seconds / 60);
-  const secs = Math.floor(seconds % 60);
-  return `${mins}:${secs.toString().padStart(2, "0")}`;
 }
 
 function beginDrag(e: MouseEvent, mode: DragMode) {
@@ -401,6 +400,7 @@ video {
 }
 
 .video-controls {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -410,12 +410,39 @@ video {
   margin: 0.5rem 0;
 }
 
+.crop-toggle {
+  display: flex;
+  align-items: center;
+}
+
+.crop-toggle label {
+  height: 24px;
+  cursor: pointer;
+}
+
+.crop-toggle .active {
+  color: var(--color-accent);
+}
+
+.crop-toggle input[type="checkbox"] {
+  position: fixed;
+  left: -999999px;
+}
+
+.crop-toggle:focus-within {
+  outline: 2px solid white;
+  border-radius: 2px;
+}
+
 .play-pause-btn {
   background: none;
   border: none;
   font-size: 20px;
   cursor: pointer;
   padding: 0;
+  display: flex;
+  align-items: center;
+  color: var(--color-accent);
 }
 
 .progress-bar {

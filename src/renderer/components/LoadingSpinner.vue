@@ -4,14 +4,14 @@
 
 <style>
 .loader {
-  width: 48px;
-  height: 48px;
+  width: 96px;
+  height: 96px;
   border-radius: 50%;
   display: inline-block;
   position: relative;
-  border: 10px solid;
+  border: 20px solid;
   border-color: rgba(255, 255, 255, 0.15) rgba(255, 255, 255, 0.25)
-    rgba(255, 255, 255, 0.35) rgba(255, 255, 255, 0.5);
+    rgba(255, 255, 255, 0.35) var(--color-primary);
   box-sizing: border-box;
   animation: rotation 1s linear infinite;
 }

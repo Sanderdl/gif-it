@@ -12,7 +12,7 @@
       <cropper-crosshair centered></cropper-crosshair>
       <cropper-handle
         action="move"
-        theme-color="rgba(255, 255, 255, 0.35)"
+        theme-color="rgba(255, 59, 48, 0.35)"
       ></cropper-handle>
       <cropper-handle action="n-resize"></cropper-handle>
       <cropper-handle action="e-resize"></cropper-handle>

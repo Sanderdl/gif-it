@@ -140,7 +140,7 @@ const handleInputChange = async (event: Event) => {
 }
 
 .drop-zone {
-  border: 2px dashed #a7a7a7;
+  border: 2px dashed #ccc;
   border-radius: 8px;
   padding: 40px 20px;
   text-align: center;

@@ -7,27 +7,12 @@
   color: #fff;
   cursor: pointer;
   font-weight: 700;
-  line-height: 1.5rem;
   padding: 0.5rem 0.8rem;
   text-align: center;
   transition: filter 0.2s;
   user-select: none;
   -webkit-user-select: none;
-}
-
-.btn:after {
-  background-clip: padding-box;
-  background-color: var(--color-primary-dark);
-  border: solid transparent;
-  border-radius: 0.5rem;
-  border-width: 0 0 4px;
-  bottom: -4px;
-  content: "";
-  left: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
-  z-index: -1;
+  box-shadow: 0 4px var(--color-primary-dark);
 }
 
 .btn:hover:not(:disabled) {
@@ -40,6 +25,7 @@
 }
 
 .btn:active:not(:disabled) {
-  border-width: 4px 0 0;
-  background: none;
+  position: relative;
+  top: 2px;
+  box-shadow: 0 2px var(--color-primary-dark);
 }
