@@ -1,5 +1,11 @@
 # Video to GIF Converter
 
+## About
+
+This project is something I wanted to build for a while because theres doesn't seem to be many good tools that do it on Linux. I thought something like this would be a good thing to use AI tools for so part of the code and this README is writting with the help of Kiro and Cursor. They kind of made a mess of it, so I'm working on cleaning it up before a release.
+
+## Details
+
 A desktop application for converting video segments to high-quality GIFs with interactive cropping and timeline selection. Built with Electron, Vue 3, and TypeScript using the [electron-vue-template](https://github.com/Deluze/electron-vue-template).
 
 ## Features
@@ -12,6 +18,7 @@ A desktop application for converting video segments to high-quality GIFs with in
 ## Requirements
 
 **FFmpeg** must be installed and available in your system PATH:
+
 - **Windows**: Download from [ffmpeg.org](https://ffmpeg.org/download.html)
 - **macOS**: `brew install ffmpeg`
 - **Linux**: `sudo apt install ffmpeg`
@@ -19,6 +26,7 @@ A desktop application for converting video segments to high-quality GIFs with in
 ## Development
 
 This project is built on the [electron-vue-template](https://github.com/Deluze/electron-vue-template) which provides:
+
 - Vue 3 + TypeScript for the renderer process
 - Vite for fast development with HMR
 - Electron Builder for cross-platform distribution
@@ -86,4 +94,3 @@ Optional configuration options can be found in the [Electron Builder CLI docs](h
   - main/ # Main thread (Electron application source)
   - renderer/ # Renderer thread (VueJS application source)
 ```
-
