@@ -1,6 +1,7 @@
 :root {
   --color-primary: oklch(69.6% 0.17 162.48);
   --color-primary-dark: oklch(61.17% 0.13644 160.912);
+  --color-accent: #ff3b30;
   --color-bg: #242424;
   --color-txt: rgba(255, 255, 255, 0.87);
   --color-panel-bg: #333232;
