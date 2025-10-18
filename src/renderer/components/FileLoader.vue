@@ -7,6 +7,7 @@
       @dragover="handleDragOver"
       @dragenter="handleDragEnter"
       @dragleave="handleDragLeave"
+      @click="openFileDialog"
     >
       <div class="drop-zone-content">
         <div class="icon">
@@ -35,9 +36,7 @@
         <div v-if="error" class="error-message">
           <p>{{ error }}</p>
         </div>
-        <button @click="openFileDialog" type="button" class="browse-button">
-          Choose File
-        </button>
+        <button type="button" class="btn">Choose File</button>
         <input
           ref="fileInput"
           type="file"
@@ -141,102 +140,67 @@ const handleInputChange = async (event: Event) => {
 }
 
 .drop-zone {
-  border: 2px dashed #ccc;
+  border: 2px dashed #a7a7a7;
   border-radius: 8px;
   padding: 40px 20px;
   text-align: center;
   cursor: pointer;
   transition: all 0.3s ease;
-  background-color: #fafafa;
+  background-color: var(--color-bg);
   position: relative;
 }
 
 .drop-zone:hover {
-  border-color: #007acc;
-  background-color: #f0f8ff;
+  border-color: var(--color-primary);
+  background-color: var(--color-panel-bg);
 }
 
 .drop-zone.drag-over {
-  border-color: #007acc;
-  background-color: #e6f3ff;
+  border-color: var(--color-primary);
   transform: scale(1.02);
 }
 
 .drop-zone.has-error {
-  border-color: #dc3545;
-  background-color: #fff5f5;
+  border-color: var(--color-error-txt);
 }
 
 .drop-zone-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 1rem;
 }
 
 .icon {
-  color: #666;
+  color: var(--color-primary);
 }
 
 .drop-zone.drag-over .icon {
-  color: #007acc;
+  color: var(--color-primary);
 }
 
 .drop-zone.has-error .icon {
-  color: #dc3545;
+  color: var(--color-error-txt);
 }
 
 h3 {
   margin: 0;
   font-size: 1.5rem;
   font-weight: 600;
-  color: #333;
 }
 
 p {
   margin: 0;
-  color: #666;
   line-height: 1.5;
 }
 
 .supported-formats {
   font-size: 0.9rem;
-  color: #888;
 }
 
 .error-message {
-  color: #dc3545;
+  color: var(--color-error-txt);
   font-weight: 500;
-}
-
-.browse-button {
-  background-color: #007acc;
-  color: white;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 6px;
-  font-size: 1rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.browse-button:after {
-  content: "";
-  position: absolute;
-  inset: 0;
-}
-
-.browse-button:hover {
-  background-color: #005a9e;
-}
-
-.drop-zone.has-error .browse-button {
-  background-color: #dc3545;
-}
-
-.drop-zone.has-error .browse-button:hover {
-  background-color: #c82333;
 }
 
 input[type="file"] {

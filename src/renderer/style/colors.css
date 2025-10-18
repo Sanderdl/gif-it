@@ -1,0 +1,17 @@
+:root {
+  --color-primary: oklch(69.6% 0.17 162.48);
+  --color-primary-dark: oklch(61.17% 0.13644 160.912);
+  --color-bg: #242424;
+  --color-txt: rgba(255, 255, 255, 0.87);
+  --color-panel-bg: #333232;
+  --color-error-txt: #dc3545;
+  --color-error-bg: #ff6272;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --color-txt: #213547;
+    --color-bg: #fff;
+    --color-panel-bg: #e4e4e4;
+  }
+}
