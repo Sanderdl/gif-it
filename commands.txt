@@ -1,0 +1,3 @@
+// Get info on streams of a video file, showing height,width,duration and framerate
+ffprobe -v error -hide_banner -of default=noprint_wrappers=0 -print_format json -select_streams v:0 -show_streams ./Downloads/7b446ec6-1145-475b-a1e8-adfeb798c50e.mp4
+

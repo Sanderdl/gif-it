@@ -1,0 +1,30 @@
+{
+  "name": "gif-it",
+  "version": "0.1.0",
+  "description": "Simple app to create gifs from videos",
+  "main": "main/main.js",
+  "scripts": {
+    "dev": "node scripts/dev-server.js",
+    "build": "node scripts/build.js && electron-builder",
+    "build:win": "node scripts/build.js && electron-builder --win",
+    "build:mac": "node scripts/build.js && electron-builder --mac",
+    "build:linux": "node scripts/build.js && electron-builder --linux"
+  },
+  "author": {
+    "name": "SanderDL",
+    "url": "https://github.com/sanderdl"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.4.1",
+    "chalk": "^4.1.2",
+    "chokidar": "^3.5.3",
+    "electron": "^32.1.2",
+    "electron-builder": "^25.1.6",
+    "typescript": "^5.2.2",
+    "vite": "^4.5.0"
+  },
+  "dependencies": {
+    "cropperjs": "^2.0.1",
+    "vue": "^3.3.8"
+  }
+}
