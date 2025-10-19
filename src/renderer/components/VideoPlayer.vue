@@ -14,7 +14,7 @@
         @loadedmetadata="onVideoLoaded"
       ></video>
       <CropperContainer
-        v-if="showCrop"
+        v-show="showCrop"
         :scale-factor="scaleFactor"
         @crop-change="handleCropChange"
       />
@@ -23,10 +23,12 @@
     <!-- Custom Video Controls -->
     <div class="video-controls">
       <button @click="togglePlayPause" class="play-pause-btn">
-        {{ isPlaying ? "⏸️" : "▶️" }}
+        <PauseIcon v-if="isPlaying" />
+        <PlayIcon v-else />
       </button>
-      <div class="time-display">
+      <div class="crop-toggle">
         <label>
+          <CropIcon :class="{ active: showCrop }" />
           <input type="checkbox" v-model="showCrop" />
         </label>
       </div>
@@ -62,6 +64,9 @@
 import { VideoMetadata } from "../../main/video_utils";
 import { onMounted, onBeforeUnmount, ref, computed, watch } from "vue";
 import CropperContainer from "./CropperContainer.vue";
+import PauseIcon from "./icons/PauseIcon.vue";
+import PlayIcon from "./icons/PlayIcon.vue";
+import CropIcon from "./icons/CropIcon.vue";
 
 interface Props {
   videoData: VideoMetadata;
@@ -84,7 +89,7 @@ const timeLine = ref<HTMLElement>();
 // Video playback state
 const isPlaying = ref(false);
 const currentTime = ref(0);
-const showCrop = ref(false);
+const showCrop = ref(true);
 
 // Selection in pixels within the full scrollable width of the timeline
 const selectionStartPx = ref(0);
@@ -233,12 +238,6 @@ function seekToPosition(event: MouseEvent) {
   );
 }
 
-function formatTime(seconds: number): string {
-  const mins = Math.floor(seconds / 60);
-  const secs = Math.floor(seconds % 60);
-  return `${mins}:${secs.toString().padStart(2, "0")}`;
-}
-
 function beginDrag(e: MouseEvent, mode: DragMode) {
   dragMode.value = mode;
   dragStartClientX.value = e.clientX;
@@ -384,7 +383,7 @@ function stopAutoScroll() {
 <style scoped>
 .wrapper {
   width: 640px;
-  background-color: #000;
+  background-color: var(--color-bg);
 }
 
 .video-container {
@@ -401,13 +400,38 @@ video {
 }
 
 .video-controls {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 8px 0;
-  background: #f5f5f5;
-  border-radius: 4px;
-  margin: 8px 0;
+  gap: 0.75rem;
+  padding: 0.5rem;
+  background: var(--color-panel-bg);
+  border-radius: 0.25rem;
+  margin: 0.5rem 0;
+}
+
+.crop-toggle {
+  display: flex;
+  align-items: center;
+}
+
+.crop-toggle label {
+  height: 24px;
+  cursor: pointer;
+}
+
+.crop-toggle .active {
+  color: var(--color-accent);
+}
+
+.crop-toggle input[type="checkbox"] {
+  position: fixed;
+  left: -999999px;
+}
+
+.crop-toggle:focus-within {
+  outline: 2px solid white;
+  border-radius: 2px;
 }
 
 .play-pause-btn {
@@ -415,27 +439,17 @@ video {
   border: none;
   font-size: 20px;
   cursor: pointer;
-  padding: 4px 8px;
-  border-radius: 4px;
-  transition: background-color 0.2s;
-}
-
-.play-pause-btn:hover {
-  background: #e0e0e0;
-}
-
-.time-display {
-  font-family: monospace;
-  font-size: 14px;
-  color: #333;
-  min-width: 80px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  color: var(--color-accent);
 }
 
 .progress-bar {
   flex: 1;
   height: 6px;
-  background: #ddd;
-  border-radius: 3px;
+  background: var(--color-bg);
+  border-radius: 100vh;
   cursor: pointer;
   position: relative;
   overflow: hidden;
@@ -443,8 +457,8 @@ video {
 
 .progress-fill {
   height: 100%;
-  background: #ff3b30;
-  border-radius: 3px;
+  background: var(--color-accent);
+  border-radius: 100vh;
   transition: width 0.1s ease;
 }
 
@@ -465,7 +479,7 @@ video {
   position: absolute;
   top: 0;
   bottom: 0;
-  border: 2px solid #ff3b30;
+  border: 2px solid var(--color-accent);
   background-color: rgba(255, 59, 48, 0.15);
   box-sizing: border-box;
   cursor: grab;

@@ -1,4 +1,5 @@
 <template>
+  <h1><span class="primary-txt">GIF</span>IT</h1>
   <LoadingSpinner v-if="appState.loading" />
   <FileLoader
     @change="handleFileSelected"
@@ -18,6 +19,7 @@
       :video-width="videoData.videoData.width"
       :video-height="videoData.videoData.height"
       :crop-settings="cropState"
+      @reset="videoData = null"
     />
   </div>
 </template>
@@ -92,4 +94,8 @@ const handleVideoCropChange = (payload: {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.primary-txt {
+  color: var(--color-primary);
+}
+</style>
