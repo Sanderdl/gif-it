@@ -16,6 +16,7 @@ function createWindow() {
       nodeIntegration: false,
       contextIsolation: true,
     },
+    autoHideMenuBar: true,
   });
 
   if (process.env.NODE_ENV === "development") {

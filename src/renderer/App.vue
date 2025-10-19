@@ -1,4 +1,5 @@
 <template>
+  <h1><span class="primary-txt">GIF</span>IT</h1>
   <LoadingSpinner v-if="appState.loading" />
   <FileLoader
     @change="handleFileSelected"
@@ -93,4 +94,8 @@ const handleVideoCropChange = (payload: {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.primary-txt {
+  color: var(--color-primary);
+}
+</style>
