@@ -30,10 +30,14 @@
         />
       </label>
     </div>
-
-    <button @click="exportGif" :disabled="isExporting" class="btn">
-      {{ isExporting ? "Exporting..." : "Export as GIF" }}
-    </button>
+    <div class="action-buttons">
+      <button @click="handleReset" class="btn border">
+        Load another video
+      </button>
+      <button @click="exportGif" :disabled="isExporting" class="btn">
+        {{ isExporting ? "Exporting..." : "Export as GIF" }}
+      </button>
+    </div>
     <div v-if="exportStatus" class="export-status" :class="exportStatus.type">
       {{ exportStatus.message }}
     </div>
@@ -59,16 +63,7 @@ interface Props {
 }
 
 interface Emits {
-  (
-    e: "cropChange",
-    payload: {
-      enabled: boolean;
-      x: number;
-      y: number;
-      width: number;
-      height: number;
-    }
-  ): void;
+  (e: "reset"): void;
 }
 
 const props = defineProps<Props>();
@@ -107,6 +102,10 @@ watch(
   },
   { deep: true }
 );
+
+const handleReset = () => {
+  emit("reset");
+};
 
 async function exportGif() {
   if (isExporting.value) return;
@@ -192,6 +191,13 @@ async function exportGif() {
   width: 80px;
 }
 
+.action-buttons {
+  display: flex;
+  justify-content: end;
+  gap: 1rem;
+  align-items: center;
+}
+
 .export-status {
   margin-top: 12px;
   padding: 8px 12px;
@@ -202,13 +208,13 @@ async function exportGif() {
 
 .export-status.success {
   background: #d4edda;
-  color: #155724;
-  border: 1px solid #c3e6cb;
+  color: var(--color-primary-dark);
+  border: 1px solid var(--color-primary-dark);
 }
 
 .export-status.error {
-  background: #f8d7da;
-  color: #721c24;
-  border: 1px solid #f5c6cb;
+  background: var(--color-error-bg);
+  color: var(--color-error-txt);
+  border: 1px solid var(--color-error-txt);
 }
 </style>

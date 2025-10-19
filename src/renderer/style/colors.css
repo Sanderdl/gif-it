@@ -1,12 +1,12 @@
 :root {
-  --color-primary: oklch(69.6% 0.17 162.48);
-  --color-primary-dark: oklch(61.17% 0.13644 160.912);
+  --color-primary: oklch(58.109% 0.12594 161.936);
+  --color-primary-dark: oklch(50.143% 0.11717 158.081);
   --color-accent: rgb(255, 59, 48);
   --color-bg: #242424;
   --color-txt: rgba(255, 255, 255, 0.87);
   --color-panel-bg: #333232;
-  --color-error-txt: #dc3545;
-  --color-error-bg: #ff6272;
+  --color-error-txt: #75020e;
+  --color-error-bg: #ebaab1;
 }
 
 @media (prefers-color-scheme: light) {

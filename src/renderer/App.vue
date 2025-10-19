@@ -18,6 +18,7 @@
       :video-width="videoData.videoData.width"
       :video-height="videoData.videoData.height"
       :crop-settings="cropState"
+      @reset="videoData = null"
     />
   </div>
 </template>
